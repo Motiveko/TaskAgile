@@ -6,29 +6,28 @@
                     <img class="logo" src="/static/images/logo.png">
                     <div class="tagline">Open source task management tool</div>
                 </div>
-                <form>
+                <form @submit.prevent="submitForm">
+                    <div v-show="errorMessage" class="alert alert-danger failed">{{errorMessage}}</div>
                     <div class="form-group">
                         <label for="username">Username</label>
-                        <input type="text" class="form-control" id="username">
+                        <input type="text" class="form-control" id="username" v-model="form.username">
                     </div>
                     <div class="form-group">
                         <label for="emailAddress">Email address</label>
-                        <input type="email" class="form-control" id="eamilAddress">
+                        <input type="em ail" class="form-control" id="eamilAddress" v-model="form.emailAddress">
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>
-                        <input type="password" class="form-control" id="password">
+                        <input type="password" class="form-control" id="password" v-model="form.password">
                     </div>
                     <button type="submit" class="btn btn-primary btn-block">Create account</button>
                     <p class="accept-terms text-center text-muted">
                         By clicking "Create account", you agree to our 
                         <!-- 서비스 방침, 개인정보 보호정책 관련 내용 만들게되면 링크 -->
-                        <a href="#">terms of service</a> and 
-                        <a href="#">privacy policy</a>.
+                        <a href="#">terms of service</a> and <a href="#">privacy policy</a>.
                     </p>
                     <p class="text-center text-muted">
-                        Already have an account?
-                        <a href="/login"> Sign in </a>
+                        Already have an account?<a href="/login">Sign in</a>
                     </p>
                 </form>
             </div>
@@ -41,15 +40,36 @@
                 <li class="list-inline-item"><a href="#">Terms of Service</a></li>
                 <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
                 <li class="list-inline-item"><a href="https://github.com/motiveko/taskagile">GitHub</a></li>
-
             </ul>
         </div>
     </div>  
 </template>
 
 <script>
+import registrationService from '@/services/registration'
+
 export default {
-    name: "RegisterPage"
+    name: "RegisterPage",
+    data: function(){
+        return {
+            form: {
+                username: '',
+                emailAddress: '',
+                password: ''
+            },
+            errorMessage: ''
+        }
+    },
+    methods: {
+        submitForm() {
+            // TODO : 데이터 검증하기
+            registrationService.register(this.form).then(() => {
+                this.$router.push({name: 'LoginPage' })
+            }).catch((error) => {
+                this.errorMessage = 'Failed to register user. Reason: ' + (error.message ? error.message : 'Unknown') + '.'
+            })
+        }
+    }
 }
 </script>
 <style lang="scss" scoped>
@@ -88,5 +108,4 @@ export default {
             color: #666;
         }
     } 
-
 </style>
