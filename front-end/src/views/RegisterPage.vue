@@ -91,12 +91,15 @@ export default {
   },
   methods: {
     submitForm () {
+      // $v는 검증에 대한 현재 상태(validation), $touch()로 validation 데이터 검증을 시작한다.
       this.$v.$touch()
+      // $invalid 로 결과 확인
       if (this.$v.$invalid) {
-          console.log("개씨발")
         return
       }
+                                  // this : vm
       registrationService.register(this.form).then(() => {
+        // axios가 백엔드에 보낸 요청이 success해서 promise가 resolve를 하면 router는 LoginPage로 redirect한다.
         this.$router.push({name: 'LoginPage'})
       }).catch((error) => {
         this.errorMessage = 'Failed to register user. ' + error.message

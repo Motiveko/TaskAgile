@@ -76,20 +76,24 @@ describe('RegisterPage.vue', () => {
 
   it('should have form submit event handler `submitForm`', () => {
     const stub = jest.fn()
-    wrapper.setMethods({submitForm: stub})
+    wrapper.setMethods({ submitForm: stub })
     buttonSubmit.trigger('submit')
     expect(stub).toBeCalled()
   })
 
   it('should register when it is a new user', async () => {
     expect.assertions(2)
-    const stub = jest.fn()
+    const stub = jest.fn() // mock function, 그냥 아무것도 없는 가짜함수
     wrapper.vm.$router.push = stub
     wrapper.vm.form.username = 'sunny'
     wrapper.vm.form.emailAddress = 'sunny@taskagile.com'
     wrapper.vm.form.password = 'JestRocks!'
     wrapper.vm.submitForm()
     expect(registerSpy).toBeCalled()
+    // register()가 promise기반의 비동기 메소드이기때문에 $nextTick()을 써야한다.
+    // wrapper.vm.$nextTick( () =\> {
+    //   expect(stub).toHaveBeenCalledWith({ name: 'LoginPage' })
+    // })
     await wrapper.vm.$nextTick()
     expect(stub).toHaveBeenCalledWith({ name: 'LoginPage' })
   })
