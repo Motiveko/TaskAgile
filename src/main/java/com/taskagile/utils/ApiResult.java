@@ -39,7 +39,6 @@ public class ApiResult extends HashMap<String, Object>{
 	public ApiResult add(String key, Object value) {
 		Assert.hasText(key, "Parameter `key` must not be blank");
 		Assert.notNull(value, "Parameter `value` must not be blank");
-		
 		// ??!?!
 		this.put(key, value);
 		return this;
