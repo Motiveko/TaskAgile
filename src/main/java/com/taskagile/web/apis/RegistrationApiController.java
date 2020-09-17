@@ -18,7 +18,7 @@ import com.taskagile.web.results.Result;
 @Controller
 public class RegistrationApiController {
 
-	private UserService service;
+	private final UserService service;
 	
 	public RegistrationApiController(UserService service) {
 		this.service = service;
