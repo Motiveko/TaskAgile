@@ -44,5 +44,4 @@ describe('services/registration', () => {
       expect(error.response.message).toEqual('Bad request')
     })
   })
-
 })

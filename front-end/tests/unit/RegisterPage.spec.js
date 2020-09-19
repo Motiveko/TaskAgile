@@ -91,7 +91,7 @@ describe('RegisterPage.vue', () => {
     wrapper.vm.submitForm()
     expect(registerSpy).toBeCalled()
     // register()가 promise기반의 비동기 메소드이기때문에 $nextTick()을 써야한다.
-    // wrapper.vm.$nextTick( () =\> {
+    // wrapper.vm.$nextTick( () => {
     //   expect(stub).toHaveBeenCalledWith({ name: 'LoginPage' })
     // })
     await wrapper.vm.$nextTick()
