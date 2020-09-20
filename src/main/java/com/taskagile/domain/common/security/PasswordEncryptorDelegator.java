@@ -1,14 +1,20 @@
 package com.taskagile.domain.common.security;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
 public class PasswordEncryptorDelegator implements PasswordEncryptor {
-
+	
+	// Spring security의 PasswordEncoder, 구현체중 하나인 BCryptPasswordEncoder를 빈등록해주고 DI
+	private final PasswordEncoder passwordEncoder;
+	
+	public PasswordEncryptorDelegator(PasswordEncoder passwordEncoder) {
+		this.passwordEncoder = passwordEncoder;
+	}
 	@Override
 	public String encrypt(String rawPassword) {
-		// TODO : 암호화로직은 추후 Spring-Security의 PasswordEncoder로 위임될 예정이다.	
-		return rawPassword;
+		return passwordEncoder.encode(rawPassword);
 	}
 
 }
