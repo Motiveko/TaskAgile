@@ -28,7 +28,7 @@ public class ApiResult extends HashMap<String, Object>{
 	public static ApiResult error(String message, String errorReferenceCode) {
 		Assert.hasText(message, "Parameter `message` must not be blank");
 		Assert.hasText(errorReferenceCode, "Parameter `errorReferenceCode` must not be blank");
-	
+
 		ApiResult apiResult = new ApiResult();
 		apiResult.put(MESSAGE_KEY, message);
 		apiResult.put(ERROR_CODE_KEY, errorReferenceCode);
