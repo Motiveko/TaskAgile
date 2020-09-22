@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
 
 import org.hibernate.exception.ConstraintViolationException;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,9 +38,18 @@ public class HibernateUserRepositoryTest {
 			return new HibernateUserRepository(entityManager);
 		}
 	}
+	
+	// Myway :: TestConfiguration 없이 이렇게 해서 repository에다가 entityManagerBean넣어주는 방식도 가능하다.
+//	@Autowired
+//	EntityManager entityManager;
+//	@Before
+//	public void setup() {
+//		repository = new HibernateUserRepository(entityManager);
+//	}
 
 	@Autowired
 	private UserRepository repository;
+	
 
 	// PersistenceException 은 persistence provider가 내는 HibernateException중 4개를 제외한
 	// 모든걸 포함한다.

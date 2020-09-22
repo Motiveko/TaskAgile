@@ -17,7 +17,7 @@
                         <label for="password">Password</label>
                         <input type="password" class="form-control" id="password" v-model="form.password">
                         <div class="field-error" v-if="$v.form.password.$dirty">
-                            <div class="error" v-if="$v.form.password.$dirty">Password is Required</div>
+                            <div class="error" v-if="!$v.form.password.required">Password is Required</div>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary btn-block">Sign in</button>

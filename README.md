@@ -4,4 +4,7 @@
 ```
 mvn clean install
 ```
+```
+mvn spring-boot:run
+```
 현재 진행중임니다..
