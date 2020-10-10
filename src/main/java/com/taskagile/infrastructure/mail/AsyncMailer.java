@@ -20,8 +20,6 @@ public class AsyncMailer implements Mailer{
 	private final JavaMailSender mailSender;
 	
 	public AsyncMailer(JavaMailSender mailSender) {
-		System.out.println("안녕하세요~@@@");
-		System.out.println(mailSender.getClass().getName());
 		this.mailSender = mailSender;
 	}
 	
